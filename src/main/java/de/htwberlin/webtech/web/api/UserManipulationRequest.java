@@ -1,15 +1,15 @@
 package de.htwberlin.webtech.web.api;
 
-public class PersonManipulationRequest {
+public class UserManipulationRequest {
 
     private String firstName;
     private String lastName;
-    private boolean vaccinated;
+    private String email;
 
-    public PersonManipulationRequest(String firstName, String lastName, boolean vaccinated) {
+    public UserManipulationRequest(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.vaccinated = vaccinated;
+        this.email = email;
     }
 
     public String getFirstName() {
@@ -28,11 +28,7 @@ public class PersonManipulationRequest {
         this.lastName = lastName;
     }
 
-    public boolean isVaccinated() {
-        return vaccinated;
-    }
+    public String getEmail() { return email; }
 
-    public void setVaccinated(boolean vaccinated) {
-        this.vaccinated = vaccinated;
-    }
+    public void setEmail(String email) { this.email = email; }
 }

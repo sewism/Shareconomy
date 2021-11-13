@@ -2,8 +2,8 @@ package de.htwberlin.webtech.persistence;
 
 import javax.persistence.*;
 
-@Entity(name = "persons")
-public class PersonEntity {
+@Entity(name = "user")
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,16 +16,17 @@ public class PersonEntity {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "is_vaccinated")
-    private Boolean vaccinated;
+    @Column(name = "email")
+    private String email;
 
-    public PersonEntity(String firstName, String lastName, Boolean vaccinated) {
+    public UserEntity(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.vaccinated = vaccinated;
+        this.email = email;
     }
 
-    protected PersonEntity() {}
+    protected UserEntity() {
+    }
 
     public Long getId() {
         return id;
@@ -47,11 +48,12 @@ public class PersonEntity {
         this.lastName = lastName;
     }
 
-    public Boolean getVaccinated() {
-        return vaccinated;
+    public String getEmail() {
+        return email;
     }
 
-    public void setVaccinated(Boolean vaccinated) {
-        this.vaccinated = vaccinated;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
+
