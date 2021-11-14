@@ -1,6 +1,7 @@
 package de.htwberlin.webtech.web.api;
 
 import de.htwberlin.webtech.Category;
+import de.htwberlin.webtech.persistence.UserEntity;
 
 import java.time.LocalDateTime;
 
@@ -10,14 +11,14 @@ public class EntryManipulationRequest {
     private LocalDateTime timestamp;
     private Category category;
     private long zipcode;
-    private User user;
+    private UserEntity userEntity;
 
-    public EntryManipulationRequest(String titel, LocalDateTime timestamp, Category category, long zipcode, User user) {
+    public EntryManipulationRequest(String titel, LocalDateTime timestamp, Category category, long zipcode, UserEntity userEntity) {
         this.titel = titel;
         this.timestamp = timestamp;
         this.category = category;
         this.zipcode = zipcode;
-        this.user = user;
+        this.userEntity = userEntity;
     }
 
     public String getTitel() {
@@ -52,11 +53,11 @@ public class EntryManipulationRequest {
         this.zipcode = zipcode;
     }
 
-    public User getUser() {
-        return user;
+    public UserEntity getUserEntity() {
+        return userEntity;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 }

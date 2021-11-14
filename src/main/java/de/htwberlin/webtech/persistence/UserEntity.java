@@ -2,7 +2,7 @@ package de.htwberlin.webtech.persistence;
 
 import javax.persistence.*;
 
-@Entity(name = "user")
+@Entity
 public class UserEntity {
 
     @Id

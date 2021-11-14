@@ -1,14 +1,11 @@
 package de.htwberlin.webtech.persistence;
 
 import de.htwberlin.webtech.Category;
-import de.htwberlin.webtech.web.api.User;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Entity
 public class EntryEntity {
 
     @Id
@@ -28,15 +25,19 @@ public class EntryEntity {
     @Column(name = "zipcode", nullable = false)
     private Long zipcode;
 
-    @Column(name = "user", nullable = false)
-    private User user;
+    @ManyToOne
+    private UserEntity userEntity;
 
-    public EntryEntity(String titel, LocalDateTime timestamp, Category category, Long zipcode, User user) {
+    public EntryEntity(String titel,
+                       LocalDateTime timestamp,
+                       Category category,
+                       Long zipcode,
+                       UserEntity userEntity) {
         this.titel = titel;
         this.timestamp = timestamp;
         this.category = category;
         this.zipcode = zipcode;
-        this.user = user;
+        this.userEntity = userEntity;
     }
 
     protected EntryEntity() {}
@@ -73,8 +74,12 @@ public class EntryEntity {
         this.zipcode = zipcode;
     }
 
-    public User getUser() {
-        return user;
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
+    }
+
+    public UserEntity getUserEntity() {
+        return userEntity;
     }
 }
 

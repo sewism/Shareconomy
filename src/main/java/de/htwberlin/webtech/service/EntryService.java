@@ -4,6 +4,7 @@ import de.htwberlin.webtech.persistence.EntryEntity;
 import de.htwberlin.webtech.persistence.EntryRepository;
 import de.htwberlin.webtech.web.api.Entry;
 import de.htwberlin.webtech.web.api.EntryManipulationRequest;
+import de.htwberlin.webtech.web.api.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public class EntryService {
     }
 
     public Entry create(EntryManipulationRequest request) {
-        var entryEntity = new EntryEntity(request.getTitel(), request.getTimestamp(), request.getCategory(), request.getZipcode(), request.getUser());
+        var entryEntity = new EntryEntity(request.getTitel(), request.getTimestamp(), request.getCategory(), request.getZipcode(), request.getUserEntity());
         entryEntity = entryRepository.save(entryEntity);
         return transformEntity(entryEntity);
     }
@@ -44,7 +45,7 @@ public class EntryService {
                 entryEntity.getTimestamp(),
                 entryEntity.getCategory(),
                 entryEntity.getZipcode(),
-                entryEntity.getUser()
+                new User(entryEntity.getUserEntity().getId(), entryEntity.getUserEntity().getFirstName(), entryEntity.getUserEntity().getLastName(), entryEntity.getUserEntity().getEmail())
         );
     }
 }
