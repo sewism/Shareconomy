@@ -1,7 +1,5 @@
 package de.htwberlin.webtech.persistence;
 
-import de.htwberlin.webtech.Category;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -20,27 +18,29 @@ public class EntryEntity {
     private LocalDateTime timestamp;
 
     @Column(name = "category")
+    @Enumerated(value = EnumType.STRING)
     private Category category;
 
     @Column(name = "zipcode", nullable = false)
     private Long zipcode;
 
-    @ManyToOne
-    private UserEntity userEntity;
+    @ManyToOne(cascade=CascadeType.MERGE)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private UserEntity user;
 
     public EntryEntity(String titel,
                        LocalDateTime timestamp,
                        Category category,
                        Long zipcode,
-                       UserEntity userEntity) {
+                       UserEntity user) {
         this.titel = titel;
         this.timestamp = timestamp;
         this.category = category;
         this.zipcode = zipcode;
-        this.userEntity = userEntity;
+        this.user = user;
     }
 
-    protected EntryEntity() {}
+    protected EntryEntity(){}
 
     public Long getId() {
         return id;
@@ -74,12 +74,12 @@ public class EntryEntity {
         this.zipcode = zipcode;
     }
 
-    public void setUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
+    public void setUser(UserEntity userEntity) {
+        this.user = userEntity;
     }
 
-    public UserEntity getUserEntity() {
-        return userEntity;
+    public UserEntity getUser() {
+        return user;
     }
 }
 

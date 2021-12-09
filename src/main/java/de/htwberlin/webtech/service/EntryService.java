@@ -1,10 +1,11 @@
 package de.htwberlin.webtech.service;
 
+import de.htwberlin.webtech.persistence.Category;
 import de.htwberlin.webtech.persistence.EntryEntity;
 import de.htwberlin.webtech.persistence.EntryRepository;
+import de.htwberlin.webtech.persistence.UserRepository;
 import de.htwberlin.webtech.web.api.Entry;
 import de.htwberlin.webtech.web.api.EntryManipulationRequest;
-import de.htwberlin.webtech.web.api.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,10 +14,14 @@ import java.util.stream.Collectors;
 @Service
 public class EntryService {
 
-    private  final EntryRepository entryRepository;
+    private final EntryRepository entryRepository;
+    private final UserRepository userRepository;
+    private final UserTransformer userTransformer;
 
-    public EntryService(EntryRepository entryRepository){
+    public EntryService(EntryRepository entryRepository, UserRepository userRepository, UserTransformer userTransformer) {
         this.entryRepository = entryRepository;
+        this.userRepository = userRepository;
+        this.userTransformer = userTransformer;
     }
 
     public List<Entry> findAll(){
@@ -33,19 +38,21 @@ public class EntryService {
     }
 
     public Entry create(EntryManipulationRequest request) {
-        var entryEntity = new EntryEntity(request.getTitel(), request.getTimestamp(), request.getCategory(), request.getZipcode(), request.getUserEntity());
+        var category = Category.valueOf(request.getCategory());
+        var user = userRepository.findById(request.getUserId()).orElseThrow();
+        var entryEntity = new EntryEntity(request.getTitel(), request.getTimestamp(), category, request.getZipcode(), user);
         entryEntity = entryRepository.save(entryEntity);
         return transformEntity(entryEntity);
     }
 
     private Entry transformEntity(EntryEntity entryEntity) {
+        var category = entryEntity.getCategory() != null ? entryEntity.getCategory().name() : Category.RAMSCH.name();
         return new Entry(
                 entryEntity.getId(),
                 entryEntity.getTitel(),
                 entryEntity.getTimestamp(),
-                entryEntity.getCategory(),
+                category,
                 entryEntity.getZipcode(),
-                new User(entryEntity.getUserEntity().getId(), entryEntity.getUserEntity().getFirstName(), entryEntity.getUserEntity().getLastName(), entryEntity.getUserEntity().getEmail())
-        );
+                userTransformer.transformEntity(entryEntity.getUser()));
     }
 }

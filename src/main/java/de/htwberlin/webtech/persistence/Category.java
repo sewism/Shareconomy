@@ -1,4 +1,4 @@
-package de.htwberlin.webtech;
+package de.htwberlin.webtech.persistence;
 
 public enum Category {
     AUTO,
@@ -7,5 +7,6 @@ public enum Category {
     HOBBY,
     HAUS,
     MODE,
-    MEDIEN
+    MEDIEN,
+    RAMSCH
 }

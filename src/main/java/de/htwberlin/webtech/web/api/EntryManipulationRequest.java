@@ -1,7 +1,6 @@
 package de.htwberlin.webtech.web.api;
 
-import de.htwberlin.webtech.Category;
-import de.htwberlin.webtech.persistence.UserEntity;
+import de.htwberlin.webtech.persistence.Category;
 
 import java.time.LocalDateTime;
 
@@ -9,16 +8,16 @@ public class EntryManipulationRequest {
 
     private String titel;
     private LocalDateTime timestamp;
-    private Category category;
+    private String category;
     private long zipcode;
-    private UserEntity userEntity;
+    private Long userId;
 
-    public EntryManipulationRequest(String titel, LocalDateTime timestamp, Category category, long zipcode, UserEntity userEntity) {
+    public EntryManipulationRequest(String titel, LocalDateTime timestamp, String category, long zipcode, Long userId) {
         this.titel = titel;
         this.timestamp = timestamp;
         this.category = category;
         this.zipcode = zipcode;
-        this.userEntity = userEntity;
+        this.userId = userId;
     }
 
     public String getTitel() {
@@ -37,11 +36,11 @@ public class EntryManipulationRequest {
         this.timestamp = timestamp;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
@@ -53,11 +52,10 @@ public class EntryManipulationRequest {
         this.zipcode = zipcode;
     }
 
-    public UserEntity getUserEntity() {
-        return userEntity;
+    public Long getUserId() {
+        return userId;
     }
-
-    public void setUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

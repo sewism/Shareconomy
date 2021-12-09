@@ -1,6 +1,6 @@
 package de.htwberlin.webtech.web.api;
 
-import de.htwberlin.webtech.Category;
+import de.htwberlin.webtech.persistence.Category;
 
 import java.time.LocalDateTime;
 
@@ -9,11 +9,11 @@ public class Entry {
     private long id;
     private String titel;
     private LocalDateTime timestamp;
-    private Category category;
+    private String category;
     private long zipcode;
     private User user;
 
-    public Entry(long id, String titel, LocalDateTime timestamp, Category category, long zipcode, User user) {
+    public Entry(long id, String titel, LocalDateTime timestamp, String category, long zipcode, User user) {
         this.id = id;
         this.titel = titel;
         this.timestamp = timestamp;
@@ -46,11 +46,11 @@ public class Entry {
         this.timestamp = timestamp;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 

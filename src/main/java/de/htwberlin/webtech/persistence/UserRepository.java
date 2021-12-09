@@ -8,4 +8,5 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     List<UserEntity> findAllByLastName(String lastName);
 
+
 }
