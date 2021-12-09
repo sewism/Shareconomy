@@ -1,6 +1,8 @@
 package de.htwberlin.webtech.persistence;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class UserEntity {
@@ -19,14 +21,16 @@ public class UserEntity {
     @Column(name = "email")
     private String email;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<EntryEntity> entries = new ArrayList<>();
+
     public UserEntity(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
     }
 
-    protected UserEntity() {
-    }
+    protected UserEntity() {}
 
     public Long getId() {
         return id;
@@ -54,6 +58,14 @@ public class UserEntity {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<EntryEntity> getEntries() {
+        return entries;
+    }
+
+    public void setEntries(List<EntryEntity> entries) {
+        this.entries = entries;
     }
 }
 

@@ -13,27 +13,29 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final UserTransformer userTransformer;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, UserTransformer userTransformer) {
         this.userRepository = userRepository;
+        this.userTransformer = userTransformer;
     }
 
     public List<User> findAll() {
         List<UserEntity> users = userRepository.findAll();
         return users.stream()
-                .map(this::transformEntity)
+                .map(userTransformer::transformEntity)
                 .collect(Collectors.toList());
     }
 
     public User findById(Long id) {
         var userEntity = userRepository.findById(id);
-        return userEntity.map(this::transformEntity).orElse(null);
+        return userEntity.map(userTransformer::transformEntity).orElse(null);
     }
 
     public User create(UserManipulationRequest request) {
         var userEntity = new UserEntity(request.getFirstName(), request.getLastName(), request.getEmail());
         userEntity = userRepository.save(userEntity);
-        return transformEntity(userEntity);
+        return userTransformer.transformEntity(userEntity);
     }
 
     public User update(Long id, UserManipulationRequest request) {
@@ -48,7 +50,7 @@ public class UserService {
         userEntity.setEmail(request.getEmail());
         userEntity = userRepository.save(userEntity);
 
-        return transformEntity(userEntity);
+        return userTransformer.transformEntity(userEntity);
     }
 
     public boolean deleteById(Long id) {
@@ -58,14 +60,5 @@ public class UserService {
 
         userRepository.deleteById(id);
         return true;
-    }
-
-    private User transformEntity(UserEntity userEntity) {
-        return new User(
-                userEntity.getId(),
-                userEntity.getFirstName(),
-                userEntity.getLastName(),
-                userEntity.getEmail()
-        );
     }
 }
