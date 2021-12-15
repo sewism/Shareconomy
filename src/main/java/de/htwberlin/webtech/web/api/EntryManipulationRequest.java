@@ -20,6 +20,8 @@ public class EntryManipulationRequest {
         this.userId = userId;
     }
 
+    public EntryManipulationRequest() {}
+
     public String getTitel() {
         return titel;
     }

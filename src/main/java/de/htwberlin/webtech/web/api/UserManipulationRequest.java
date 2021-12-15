@@ -12,6 +12,8 @@ public class UserManipulationRequest {
         this.email = email;
     }
 
+    public UserManipulationRequest(){}
+
     public String getFirstName() {
         return firstName;
     }
