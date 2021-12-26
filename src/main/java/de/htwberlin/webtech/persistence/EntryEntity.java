@@ -14,6 +14,9 @@ public class EntryEntity {
     @Column(name = "titel", nullable = false)
     private String titel;
 
+    @Column(name = "description", nullable = false)
+    private String description;
+
     @Column(name = "timestamp", nullable = false)
     private LocalDateTime timestamp;
 
@@ -29,11 +32,13 @@ public class EntryEntity {
     private UserEntity user;
 
     public EntryEntity(String titel,
+                       String description,
                        LocalDateTime timestamp,
                        Category category,
                        Long zipcode,
                        UserEntity user) {
         this.titel = titel;
+        this.description = description;
         this.timestamp = timestamp;
         this.category = category;
         this.zipcode = zipcode;
@@ -53,6 +58,10 @@ public class EntryEntity {
     public void setTitel(String titel) {
         this.titel = titel;
     }
+
+    public String getDescription() { return description; }
+
+    public void setDescription(String description) { this.description = description; }
 
     public LocalDateTime getTimestamp() {
         return timestamp;

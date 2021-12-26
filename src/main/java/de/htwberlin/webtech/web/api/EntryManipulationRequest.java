@@ -7,13 +7,15 @@ import java.time.LocalDateTime;
 public class EntryManipulationRequest {
 
     private String titel;
+    private String description;
     private LocalDateTime timestamp;
     private String category;
     private long zipcode;
     private Long userId;
 
-    public EntryManipulationRequest(String titel, LocalDateTime timestamp, String category, long zipcode, Long userId) {
+    public EntryManipulationRequest(String titel, String description, LocalDateTime timestamp, String category, long zipcode, Long userId) {
         this.titel = titel;
+        this.description = description;
         this.timestamp = timestamp;
         this.category = category;
         this.zipcode = zipcode;
@@ -29,6 +31,10 @@ public class EntryManipulationRequest {
     public void setTitel(String titel) {
         this.titel = titel;
     }
+
+    public String getDescription() { return description; }
+
+    public void setDescription(String description) { this.description = description; }
 
     public LocalDateTime getTimestamp() {
         return timestamp;
@@ -57,6 +63,7 @@ public class EntryManipulationRequest {
     public Long getUserId() {
         return userId;
     }
+
     public void setUserId(Long userId) {
         this.userId = userId;
     }

@@ -40,7 +40,7 @@ public class EntryService {
     public Entry create(EntryManipulationRequest request) {
         var category = Category.valueOf(request.getCategory());
         var user = userRepository.findById(request.getUserId()).orElseThrow();
-        var entryEntity = new EntryEntity(request.getTitel(), request.getTimestamp(), category, request.getZipcode(), user);
+        var entryEntity = new EntryEntity(request.getTitel(), request.getDescription(), request.getTimestamp(), category, request.getZipcode(), user);
         entryEntity = entryRepository.save(entryEntity);
         return transformEntity(entryEntity);
     }
@@ -50,6 +50,7 @@ public class EntryService {
         return new Entry(
                 entryEntity.getId(),
                 entryEntity.getTitel(),
+                entryEntity.getDescription(),
                 entryEntity.getTimestamp(),
                 category,
                 entryEntity.getZipcode(),

@@ -8,14 +8,16 @@ public class Entry {
 
     private long id;
     private String titel;
+    private String description;
     private LocalDateTime timestamp;
     private String category;
     private long zipcode;
     private User user;
 
-    public Entry(long id, String titel, LocalDateTime timestamp, String category, long zipcode, User user) {
+    public Entry(long id, String titel, String description, LocalDateTime timestamp, String category, long zipcode, User user) {
         this.id = id;
         this.titel = titel;
+        this.description = description;
         this.timestamp = timestamp;
         this.category = category;
         this.zipcode = zipcode;
@@ -37,6 +39,10 @@ public class Entry {
     public void setTitel(String titel) {
         this.titel = titel;
     }
+
+    public String getDescription() { return description; }
+
+    public void setDescription(String description) { this.description = description; }
 
     public LocalDateTime getTimestamp() {
         return timestamp;
