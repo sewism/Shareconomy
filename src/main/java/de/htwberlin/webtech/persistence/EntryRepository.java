@@ -9,6 +9,4 @@ import java.util.List;
 public interface EntryRepository extends JpaRepository<EntryEntity, Long> {
 
     List<EntryEntity> findEntryEntityByCategory(Category category);
-
-    UserEntity findUserEntityById(Long id);
 }

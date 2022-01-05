@@ -1,7 +1,5 @@
 package de.htwberlin.webtech.web.api;
 
-import de.htwberlin.webtech.persistence.Category;
-
 import java.time.LocalDateTime;
 
 public class Entry {
@@ -12,15 +10,17 @@ public class Entry {
     private LocalDateTime timestamp;
     private String category;
     private long zipcode;
+    private String imageURL;
     private User user;
 
-    public Entry(long id, String titel, String description, LocalDateTime timestamp, String category, long zipcode, User user) {
+    public Entry(long id, String titel, String description, LocalDateTime timestamp, String category, long zipcode, String imageURL, User user) {
         this.id = id;
         this.titel = titel;
         this.description = description;
         this.timestamp = timestamp;
         this.category = category;
         this.zipcode = zipcode;
+        this.imageURL = imageURL;
         this.user = user;
     }
 
@@ -66,6 +66,14 @@ public class Entry {
 
     public void setZipcode(long zipcode) {
         this.zipcode = zipcode;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public User getUser() {

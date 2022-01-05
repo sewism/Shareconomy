@@ -27,6 +27,9 @@ public class EntryEntity {
     @Column(name = "zipcode", nullable = false)
     private Long zipcode;
 
+    @Column(name = "imageURL", nullable = true)
+    private String imageURL;
+
     @ManyToOne(cascade=CascadeType.MERGE)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity user;
@@ -36,12 +39,14 @@ public class EntryEntity {
                        LocalDateTime timestamp,
                        Category category,
                        Long zipcode,
+                       String imageURL,
                        UserEntity user) {
         this.titel = titel;
         this.description = description;
         this.timestamp = timestamp;
         this.category = category;
         this.zipcode = zipcode;
+        this.imageURL = imageURL;
         this.user = user;
     }
 
@@ -81,6 +86,13 @@ public class EntryEntity {
 
     public void setZipcode(Long zipcode) {
         this.zipcode = zipcode;
+    }
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public void setUser(UserEntity userEntity) {
